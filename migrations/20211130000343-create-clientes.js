@@ -2,25 +2,21 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('tasks', { 
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-      },
-      title: Sequelize.STRING,
-      description: Sequelize.STRING,
-      done: Sequelize.BOOLEAN,
-      deleted: Sequelize.BOOLEAN,
-      createdAt: Sequelize.DATE,
-      updatedAt: Sequelize.DATE,
-    });
+    await queryInterface.bulkInsert('Tasks', [{
+      title: 'tarefa teste',
+      description: 'descricao teste',
+      done: false,
+      deleted: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+     }], {});
 
   },
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('tasks');
+
+    await queryInterface.bulkDelete('Tasks', null, {});
 
   }
 };
